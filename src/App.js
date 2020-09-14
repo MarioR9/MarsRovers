@@ -22,7 +22,6 @@ export default class App extends React.Component{
      rovers.push(`rover#${i}`)
    }
    this.setState({deployedRovers: rovers})
-   console.log(this.state.deployedRovers)
   }
   render(){
     return (
@@ -56,6 +55,9 @@ export default class App extends React.Component{
           <InputGroup className="mb-3"> 
             <InputGroup.Prepend>
             <InputGroup.Text id="basic-addon1">Rover#{counter++} init location</InputGroup.Text>
+            <FormControl className="input-group" 
+            aria-label="gridPositionX"
+            />
             <FormControl className="input-group" 
             aria-label="gridPositionX"
             />
