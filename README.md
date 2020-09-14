@@ -5,9 +5,9 @@ A simple two-dimensional coordinate grid is mapped to the plateau to aid in rove
 NASA remotely controls rovers via instructions consisting of strings of letters. Possible instruction letters are L,  R, and M. L and R instruct the rover to turn 90 degrees left or right, respectively (without moving from its current  spot), while M instructs the rover to move forward one grid point along its current heading. 
 Your task is write an application that takes the test input (instructions from NASA) and provides the expected  output (the feedback from the rovers to NASA). Each rover will move in series, i.e. the next rover will not start  moving until the one preceding it finishes.  
 
-##INPUT 
+## INPUT 
 Assume the southwest corner of the grid is 0,0 (the origin). The first  line of input establishes the exploration grid bounds by indicating  the coordinates corresponding to the northeast corner of the  plateau. 
 Next, each rover is given its instructions in turn. Each rover’s  instructions consists of two lines of strings. The first string confirms  the rover’s current position and heading. The second string consists  of turn / move instructions.  
 
-##OUTPUT 
+## OUTPUT 
 Once each rover has received and completely 
