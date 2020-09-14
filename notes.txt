@@ -1,0 +1,7 @@
+
+    - NASA is landing multiple rovers user can create multiple rover instances.
+    - Each rover will send information back to earth.
+    - Coordinates 0 0 corresponds to the sothwest corner
+    - Each rover can turn 90 degrees left or right on its on axi East represented by X and North Represented by Y
+    - Each rover can move one grid point along its current heading.
+    - Each rover will only move until the preceding one has finishes its route.
