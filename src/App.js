@@ -16,12 +16,15 @@ export default class App extends React.Component{
     this.setState({roverMoves: moves.toUpperCase()})
   }
   handleRovers=()=>{ //handler will create instaces of the desired amount of rovers and push them into and array.
+    counter = 1
    let rovers = []
    let nOfRovers = parseInt(this.state.numberOfRovers)
-   for(let i=0; i < nOfRovers; i++){
-     rovers.push(`rover#${i}`)
-   }
-   this.setState({deployedRovers: rovers})
+    for(let i=0; i < nOfRovers; i++){
+      rovers.push(`rover#${i}`)
+    }
+    this.setState({deployedRovers: rovers})
+   
+   
   }
   render(){
     return (
