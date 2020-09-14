@@ -6,7 +6,7 @@ import { InputGroup, FormControl } from 'react-bootstrap';
 export default class App extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {gridX: '',gridY: '' };
+    this.state = {gridX: '',gridY: '', numberOfRovers:'' };
   }
   render(){
     return (
@@ -20,6 +20,15 @@ export default class App extends React.Component{
           />
           <FormControl className="input-group" onChange={(e)=>{this.setState({gridY: e.currentTarget.value})}}
           aria-label="gridPositionY"
+          />
+          </InputGroup.Prepend>
+        </InputGroup>
+
+        <InputGroup className="mb-3">
+          <InputGroup.Prepend>
+          <InputGroup.Text id="basic-addon1"># of Rovers</InputGroup.Text>
+          <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}
+          aria-label="numberOfRovers"
           />
           </InputGroup.Prepend>
         </InputGroup>
