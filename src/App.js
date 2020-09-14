@@ -6,11 +6,16 @@ import { InputGroup, FormControl } from 'react-bootstrap';
 export default class App extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {gridX: '',gridY: '', numberOfRovers:'' };
+    this.state = {gridX: '',gridY: '', numberOfRovers:'',roverMoves:'' };
+  }
+  handleMovements=(e)=>{
+    const checkForLorM = /[^l^m]/gi;
+    let moves = e.currentTarget.value.replace(checkForLorM,'')
+    this.setState({roverMoves: moves.toUpperCase()})
   }
   render(){
     return (
-      <div className="App">
+      <div className="App"> 
         <div className="input-location">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
@@ -23,8 +28,8 @@ export default class App extends React.Component{
           />
           </InputGroup.Prepend>
         </InputGroup>
-
-        <InputGroup className="mb-3">
+        <div>
+        <InputGroup className="mb-3"> 
           <InputGroup.Prepend>
           <InputGroup.Text id="basic-addon1"># of Rovers</InputGroup.Text>
           <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}
@@ -32,6 +37,23 @@ export default class App extends React.Component{
           />
           </InputGroup.Prepend>
         </InputGroup>
+        </div>
+        <div>
+        <InputGroup className="mb-3"> 
+          <InputGroup.Prepend>
+          <InputGroup.Text id="basic-addon1">Rover#{this.state.numberOfRovers} location</InputGroup.Text>
+          <FormControl className="input-group" 
+          aria-label="gridPositionX"
+          />
+          <InputGroup.Text id="basic-addon1">Movments</InputGroup.Text>
+          <FormControl className="input-group-move" onChange={this.handleMovements}
+          aria-label="numberOfRovers"
+          />
+          </InputGroup.Prepend>
+        </InputGroup>
+        </div>
+        
+
         </div>
    
       </div>
