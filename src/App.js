@@ -4,8 +4,6 @@ import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { ScatterChart,Scatter ,Legend, ZAxis, CartesianGrid, YAxis, XAxis, Tooltip } from 'recharts';
 
 
-let counter = 1;
-
 export default class App extends React.Component{
   constructor(props) {
     super(props);
@@ -16,20 +14,21 @@ export default class App extends React.Component{
     const checkForLorM = /[^l^m]/gi;
     let moves = e.currentTarget.value.replace(checkForLorM,'')
     this.setState({roverMoves: moves.toUpperCase()})
+    
   }
+  
   handleRovers=()=>{ //handler will create instaces of the desired amount of rovers and push them into and array.
-    counter = 1
+   let counter = 0
    let rovers = []
    let nOfRovers = parseInt(this.state.numberOfRovers)
     for(let i=0; i < nOfRovers; i++){
-      rovers.push(`rover#${i}`)
+      rovers.push(counter++)
     }
     this.setState({deployedRovers: rovers, start: 'ready'})
-   
-   
   }
-  render(){
 
+  render(){
+    let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16)
     return (
       <div className="App"> 
         <div className="input-location">
@@ -49,7 +48,6 @@ export default class App extends React.Component{
           <InputGroup.Prepend>
           <InputGroup.Text id="basic-addon1"># of Rovers</InputGroup.Text>
           <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}
-          aria-label="numberOfRovers"
           />
           <Button onClick={this.handleRovers} variant="info">Build</Button>{' '}
           </InputGroup.Prepend>
@@ -57,19 +55,18 @@ export default class App extends React.Component{
         </div>
         {this.state.deployedRovers.map(rover => 
         
-          <div > 
+          <div id={rover} key={rover}> 
           <InputGroup className="mb-3"> 
             <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Rover#{counter++} init location</InputGroup.Text>
+            <InputGroup.Text id="basic-addon1">Rover#{rover} init location</InputGroup.Text>
             <FormControl className="input-group" 
             aria-label="gridPositionX"
             />
             <FormControl className="input-group" 
             aria-label="gridPositionX"
             />
-            <InputGroup.Text id="basic-addon1">Movements</InputGroup.Text>
+            <InputGroup.Text >Movements</InputGroup.Text>
             <FormControl className="input-group-move" onChange={this.handleMovements}
-            aria-label="numberOfRovers"
             />
             </InputGroup.Prepend>
           </InputGroup>
@@ -77,7 +74,7 @@ export default class App extends React.Component{
           )}
          {this.state.start === "notready" ? null :  <Button onClick={this.handleRovers} variant="info">Deploy</Button>}
         </div>
-        
+
         <div>
         <ScatterChart width={700} height={300}
           margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
@@ -87,7 +84,7 @@ export default class App extends React.Component{
           <ZAxis dataKey="z" dataKey="heading/"  range={[700]}/>
           <Tooltip cursor={{ strokeDasharray: '5  5' }} />
           <Legend />
-          <Scatter name="rover#1" data={this.state.data} fill="#f7000042" />
+          <Scatter name="rover#1" data={this.state.data} fill={randomColor} />
         </ScatterChart>
         </div>
         
