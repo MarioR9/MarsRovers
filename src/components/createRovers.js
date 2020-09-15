@@ -11,7 +11,7 @@ export default class CreateRovers extends React.Component{
         show: false
         };
       }
-    handleAlert=()=>{
+    handleAlert=()=>{ //handles state of notificaions as well as loading info for each rovers
         this.props.handleInfoLoading()
         this.setState({ show: true })
     }  
@@ -36,16 +36,14 @@ export default class CreateRovers extends React.Component{
                 <Button onClick={this.props.handleRoverMovment} variant="outline-danger">Start</Button>
                 <Button onClick={this.props.handleVisual} variant="outline-dark">Clear</Button>
                 </Col>
-                
             </Form.Row>
            
             </Form>
-            
                 <div>
                 <SweetAlert
-                    show={this.state.show}
-                    title="Info Loading"
-                    text="Continue..."
+                    show={this.state.show} //Notification that data has beenn loded to the current rover's memory
+                    title="Data Loaded"
+                    text="Press Start to deploy"
                     onConfirm={() => this.setState({ show: false })}/>
                 </div>
 

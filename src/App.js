@@ -14,7 +14,6 @@ export default class App extends React.Component{
     gridX: !'',
     gridY: '', 
     gridZ: '',
-    numberOfRovers: 0 ,
     roverMoves: '', 
     deployedRovers: [],
     start: false,
@@ -36,19 +35,19 @@ export default class App extends React.Component{
   handleCollectBtn=()=>{
     this.setState({bounds: {x:this.state.boundX, y:this.state.boundY}})
   }
-  handleMovementsInput=(e)=>{
+  handleMovementsInput=(e)=>{ //regex to make sure input only captures corrent directions. it will only store L , M or R.
     const checkForLorM = /[^l^m^r]/gi;
     let moves = e.currentTarget.value.replace(checkForLorM,'')
     this.setState({roverMoves: moves.toUpperCase()})
   }
   handleRovers=()=>{ //handler will create instaces of the desired amount of rovers and push them into and array.
     if(this.state.data.length === 0){
-      let rovers = new Array()
+      let rovers = []
       dataMovm=[]
       rovers.push(1)
     this.setState({deployedRovers: rovers})
     }else{
-      this.state.data.length = 0
+      this.setState({data: []})
       dataMovm.length = 0
     } 
   }
@@ -57,20 +56,20 @@ export default class App extends React.Component{
     let input = e.currentTarget.value.split("")
     this.setState({gridX: input[0],gridY: input[1], gridZ: input[2]})
   }
-  handleInfoLoading=()=>{
+  handleInfoLoading=()=>{ //resets data array and also sets new data for rovers.
     dataMovm.length = 0
-    this.state.data.length = 0
+    this.setState({data: []})
     dataMovm.push({x: parseInt(this.state.gridX), 
     y: parseInt(this.state.gridY), 
     mvm: this.state.roverMoves, 
     z: this.state.gridZ})
     this.setState({data: dataMovm})
   }
-  handleVisual=()=>{
+  handleVisual=()=>{ //resets the array of results and clears the visual.
     finalCoordinates.length = 0
     this.setState({data: []})
   }
-  handleRoverMovment=()=>{
+  handleRoverMovment=()=>{ //runs algorithm and start visual graph with algorithm's results.
     this.setState({data: []})
     let north = 'N'
     let south = 'S'
@@ -81,7 +80,7 @@ export default class App extends React.Component{
       let movement = this.state.data[k].mvm.split("")
       let currentX= this.state.data[k].x
       let currentY= this.state.data[k].y
-      let currentHeading = this.state.data[k].z
+      let currentHeading = this.state.data[k].z.toUpperCase()
 
       for(let i=0; i<movement.length; i++){ //we are going to loop over movements after sliting the movement string. we going to check one by one whether is L or R to determine were the rover is heading next.
         switch (movement[i]) {
@@ -100,6 +99,7 @@ export default class App extends React.Component{
               break;
             }
             break;
+            default:
           case "R":
             if(currentHeading === north){
               currentHeading = east
@@ -129,6 +129,7 @@ export default class App extends React.Component{
               currentX--
               break;
           }  
+          break;
         }
       }
       finalCoordinates.push({data:[["x",`Heading: ${currentHeading}`],[this.state.data[k].x,this.state.data[k].y],[currentX, currentY]]})
@@ -164,7 +165,6 @@ export default class App extends React.Component{
           handleRoverLocationX={this.handleRoverLocationX} 
           handleMovementsInput={this.handleMovementsInput} 
           handleInfoLoading={this.handleInfoLoading}
-          numberOfRovers={this.state.numberOfRovers}
           handleRoverMovment={this.handleRoverMovment}
           handleVisual={this.handleVisual}
           show={this.state.show}

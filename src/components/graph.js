@@ -17,17 +17,16 @@ export default class Graph extends React.Component{
                 height={'400px'}
                 chartType="LineChart"
                 loader={<div>Loading Chart</div>}
-                data={this.props.data.data}
+                data={this.props.data.data} 
                 options={{
                     colors: [`${randomColor}`],
                     title: `Rovers Route`,
                     pointShape: 'diamond',
                     pointSize: 18,
-                    hAxis: { title: 'S', minValue: 0, maxValue: this.props.bounds.x },
+                    hAxis: { title: 'S', minValue: 0, maxValue: this.props.bounds.x }, //set the bounds for each graph
                     vAxis: { title: 'W', minValue: 0, maxValue: this.props.bounds.y },
                 }}
-                rootProps={{ 'data-testid': '1' }}
-                />
+                rootProps={{ 'data-testid': '1' }}/>
                 </Col>
                 <Col>
                 <Accordion>
