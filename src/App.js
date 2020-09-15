@@ -20,7 +20,6 @@ export default class App extends React.Component{
     disabled: false,
     deployUnits: false,
     data:[],
-    clearBtn: false,
     boundX:'',
     boundY:'',
     bounds:[],
@@ -141,8 +140,6 @@ export default class App extends React.Component{
     return (
       
       <div className="App">
-        {this.state.clearBtn === true ? <Button onClick={()=>{window.location.reload()}}>Clear</Button>:null}
-      
         <div className="input-location">
         <div>
         <InputGroup className="mb-2"> 
@@ -175,7 +172,7 @@ export default class App extends React.Component{
       
         <div>
         {finalCoordinates.map(data =>
-         <Graph  bounds={this.state.bounds} handleClearBtn={this.handleClearBtn} data={data}/>
+         <Graph key={data} bounds={this.state.bounds} handleClearBtn={this.handleClearBtn} data={data}/>
         )}
         </div>
       </div>

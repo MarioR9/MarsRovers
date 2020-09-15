@@ -7,7 +7,7 @@ export default class Graph extends React.Component{
     render(){
     let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16) //generate random color
         return(
-            <div>
+            <div >
 
             <Container>
             <Row>
