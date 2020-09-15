@@ -1,6 +1,14 @@
 import React from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 export default class CreateRovers extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {currentRovers:0};
+      }
+    componentDidMount(){
+        this.setState({currentRovers: this.props.rover})
+    }
+
     render(){
         return(
             <div>
@@ -8,17 +16,12 @@ export default class CreateRovers extends React.Component{
                 <InputGroup className="mb-3"> 
                     <InputGroup.Prepend>
                     <InputGroup.Text id="basic-addon1">Rover#{this.props.rover} init location</InputGroup.Text>
-                    <FormControl className="input-group" onChange={this.props.handleRoverLocationX}
-                    />
-                    <FormControl className="input-group" onChange={this.props.handleRoverLocationY}
-                    />
-                    <InputGroup.Text id="basic-addon1">Initial Heading</InputGroup.Text>
-                    <FormControl className="input-group" onChange={this.props.handleRoverLocationZ}
+                    <FormControl className="input-group-move"  placeholder="ex: 12N" onChange={this.props.handleRoverLocationX}
                     />
                     <InputGroup.Text >Movements</InputGroup.Text>
-                    <FormControl className="input-group-move" onChange={this.props.handleMovementsInput}
+                    <FormControl className="input-group-move" placeholder="LMLMLMLMM" onChange={this.props.handleMovementsInput}
                     />
-                    <Button onClick={this.props.handleMovements} variant="success">Build rover</Button>
+                    <Button onClick={this.props.handleRoverMovment} variant="success">Build rover</Button>
                     </InputGroup.Prepend>
                 </InputGroup>
             </div> 
