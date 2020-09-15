@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { InputGroup, FormControl, Button} from 'react-bootstrap';
 import CreateRovers from './components/createRovers.js'
 import Graph from './components/graph.js'
 
@@ -42,14 +42,15 @@ export default class App extends React.Component{
     this.setState({roverMoves: moves.toUpperCase()})
   }
   handleRovers=()=>{ //handler will create instaces of the desired amount of rovers and push them into and array.
-   let counter = 0
-   let rovers = []
-   dataMovm=[]
-   let nOfRovers = parseInt(this.state.numberOfRovers)
-    for(let i=0; i < nOfRovers; i++){
-      rovers.push(counter++)
-    }
-  this.setState({deployedRovers: rovers})
+    if(this.state.data.length === 0){
+      let rovers = new Array()
+      dataMovm=[]
+      rovers.push(1)
+    this.setState({deployedRovers: rovers})
+    }else{
+      this.state.data.length = 0
+      dataMovm.length = 0
+    } 
   }
 
   handleRoverLocationX=(e)=>{
@@ -57,13 +58,20 @@ export default class App extends React.Component{
     this.setState({gridX: input[0],gridY: input[1], gridZ: input[2]})
   }
   handleInfoLoading=()=>{
+    dataMovm.length = 0
+    this.state.data.length = 0
     dataMovm.push({x: parseInt(this.state.gridX), 
     y: parseInt(this.state.gridY), 
     mvm: this.state.roverMoves, 
     z: this.state.gridZ})
     this.setState({data: dataMovm})
   }
+  handleVisual=()=>{
+    finalCoordinates.length = 0
+    this.setState({data: []})
+  }
   handleRoverMovment=()=>{
+    this.setState({data: []})
     let north = 'N'
     let south = 'S'
     let west = 'W'
@@ -123,7 +131,7 @@ export default class App extends React.Component{
           }  
         }
       }
-      finalCoordinates.push({data:[["x",`heading: ${currentHeading}`],[this.state.data[k].x,this.state.data[k].y],[currentX, currentY]]})
+      finalCoordinates.push({data:[["x",`Heading: ${currentHeading}`],[this.state.data[k].x,this.state.data[k].y],[currentX, currentY]]})
     }
    
   }
@@ -141,14 +149,11 @@ export default class App extends React.Component{
           <InputGroup.Text id="basic-addon1">Bonds</InputGroup.Text>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundX: e.currentTarget.value})}}/>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundY: e.currentTarget.value})}}/>
-          <Button onClick={this.handleCollectBtn} disabled={this.state.disabled} variant="info">Collect!</Button>
+          <Button variant="outline-info" onClick={this.handleCollectBtn} disabled={this.state.disabled} >Set</Button>
           </InputGroup.Prepend>
           <br></br>
-          <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1"> Rovers </InputGroup.Text>
-          <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}/>
-          <Button onClick={this.handleRovers} disabled={this.state.disabled} variant="info">Build</Button>
-          </InputGroup.Prepend>
+          <Button onClick={this.handleRovers} disabled={this.state.disabled} variant="outline-info">Let's Build Rovers!</Button>
+          
         </InputGroup>
         </div>
 
@@ -161,7 +166,7 @@ export default class App extends React.Component{
           handleInfoLoading={this.handleInfoLoading}
           numberOfRovers={this.state.numberOfRovers}
           handleRoverMovment={this.handleRoverMovment}
-          data={this.state.data}
+          handleVisual={this.handleVisual}
           show={this.state.show}
           closeShow={this.state.handleShowBtn}/>
         )}
@@ -173,9 +178,6 @@ export default class App extends React.Component{
          <Graph  bounds={this.state.bounds} handleClearBtn={this.handleClearBtn} data={data}/>
         )}
         </div>
-        
-       
-          
       </div>
     );
   }

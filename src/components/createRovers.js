@@ -12,23 +12,19 @@ export default class CreateRovers extends React.Component{
         };
       }
     handleAlert=()=>{
-        if(parseInt(this.props.numberOfRovers) === this.props.data.length){
-            this.props.handleRoverMovment()
-        }
         this.props.handleInfoLoading()
         this.setState({ show: true })
-        console.log(this.props.numberOfRovers)
-        console.log(this.props.data.length)
-   
     }  
+
+     
     render(){
         return(
             <div>
             <div > 
-            <Form>
+            <Form >
             <Form.Row>
                 <Col xs={3}>
-                <InputGroup.Text id="basic-addon1">Rover#{this.props.rover}</InputGroup.Text>
+                <InputGroup.Text id="basic-addon1">Rover Coordinates</InputGroup.Text>
                 <FormControl className="input-group-move"  placeholder="ex: 12N" onChange={this.props.handleRoverLocationX}/>
                 </Col>
                 <Col>
@@ -36,10 +32,15 @@ export default class CreateRovers extends React.Component{
                 <FormControl className="input-group-move" placeholder="ex: LMLMLMLMM" onChange={this.props.handleMovementsInput}/>
                 </Col>
                 <Col>
-                <Button onClick={this.handleAlert} variant="info">Load Data</Button>
+                <Button onClick={this.handleAlert} variant="outline-info">Load Data</Button>
+                <Button onClick={this.props.handleRoverMovment} variant="outline-danger">Start</Button>
+                <Button onClick={this.props.handleVisual} variant="outline-dark">Clear</Button>
                 </Col>
+                
             </Form.Row>
+           
             </Form>
+            
                 <div>
                 <SweetAlert
                     show={this.state.show}
