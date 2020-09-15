@@ -10,7 +10,8 @@ let dataMovm=[]
 export default class App extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {gridX: '',
+    this.state = {
+    gridX: !'',
     gridY: '', 
     gridZ: '',
     numberOfRovers: 0 ,
@@ -19,21 +20,26 @@ export default class App extends React.Component{
     start: "notready",
     disabled: false,
     deployUnits: false,
-    data:[]
+    data:[],
+    clearBtn: false,
+    boundX:'',
+    boundY:'',
+    bounds:[]
     };
   }
-  handleMovements=(e)=>{ //Regex will prevent from storing any numbers or symbols. Only storeing set moves either M or L.
-    dataMovm.push({x: parseInt(this.state.gridX), y: parseInt(this.state.gridY), mvm: this.state.roverMoves, z: this.state.gridZ})
-    this.setState({data: dataMovm})
+  handleClearBtn=()=>{
+    this.setState({clearBtn: true})
   }
- 
+  handleCollectBtn=()=>{
+    this.setState({bounds: {x:this.state.boundX, y:this.state.boundY}})
+  }
   handleMovementsInput=(e)=>{
     const checkForLorM = /[^l^m^r]/gi;
     let moves = e.currentTarget.value.replace(checkForLorM,'')
     this.setState({roverMoves: moves.toUpperCase()})
   }
   handleRovers=()=>{ //handler will create instaces of the desired amount of rovers and push them into and array.
-   let counter = 1
+   let counter = 0
    let rovers = []
    dataMovm=[]
    let nOfRovers = parseInt(this.state.numberOfRovers)
@@ -44,16 +50,15 @@ export default class App extends React.Component{
   }
 
   handleRoverLocationX=(e)=>{
-    this.setState({gridX: e.currentTarget.value})
-  }
-  handleRoverLocationY=(e)=>{
-    this.setState({gridY: e.currentTarget.value})
-  }
-  handleRoverLocationZ=(e)=>{
-    this.setState({gridZ: e.currentTarget.value})
+    let input = e.currentTarget.value.split("")
+    this.setState({gridX: input[0],gridY: input[1], gridZ: input[2]})
   }
   handleRoverMovment=()=>{
-    dataMovm.push({x: parseInt(this.state.gridX), y: parseInt(this.state.gridY), mvm: this.state.roverMoves, z: this.state.gridZ})
+    dataMovm.push({x: parseInt(this.state.gridX), 
+                  y: parseInt(this.state.gridY), 
+                  mvm: this.state.roverMoves, 
+                  z: this.state.gridZ})
+
     this.setState({data: dataMovm})
 
     let north = 'N'
@@ -72,79 +77,74 @@ export default class App extends React.Component{
           case "L":
             if(currentHeading === north){
               currentHeading = west
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === west){
               currentHeading = south
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === south){
               currentHeading = east
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === east){
               currentHeading = north
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }
             break;
           case "R":
             if(currentHeading === north){
               currentHeading = east
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === east){
               currentHeading = south
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === south){
               currentHeading = west
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === west){
               currentHeading = north
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }
             break;
           case "M": 
             if(currentHeading === north){
               currentY++
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === east){
               currentX++
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === south){
               currentY--
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
             }else if(currentHeading === west){
               currentX--
-              finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
               break;
           }  
         }
       }
-      finalCoordinates.push({x:currentX, y:currentY, z:currentHeading})
+      finalCoordinates.push({data:[["x",`heading: ${currentHeading}`],[this.state.data[k].x,this.state.data[k].y],[currentX, currentY]]})
     }
-    console.log(finalCoordinates)
+   
   }
 
   render(){
     return (
       
       <div className="App">
-      {/* <Button onClick={()=>{window.location.reload()}}>Start Again</Button> */}
+        {this.state.clearBtn === true ? <Button onClick={()=>{window.location.reload()}}>Clear</Button>:null}
+      
         <div className="input-location">
         <div>
-        <InputGroup className="mb-3"> 
+        <InputGroup className="mb-2"> 
+        <InputGroup.Prepend>
+          <InputGroup.Text id="basic-addon1">Bonds</InputGroup.Text>
+          <FormControl className="input-group"  onChange={(e)=>{this.setState({boundX: e.currentTarget.value})}}/>
+          <FormControl className="input-group"  onChange={(e)=>{this.setState({boundY: e.currentTarget.value})}}/>
+          <Button onClick={this.handleCollectBtn} disabled={this.state.disabled} variant="info">Collect!</Button>
+          </InputGroup.Prepend>
+          <br></br>
           <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1"># of Rovers</InputGroup.Text>
-          <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}
-          />
-          <Button onClick={this.handleRovers} variant="info">Build</Button>
+          <InputGroup.Text id="basic-addon1"> Rovers </InputGroup.Text>
+          <FormControl className="input-group" onChange={(e)=>{this.setState({numberOfRovers: e.currentTarget.value})}}/>
+          <Button onClick={this.handleRovers} disabled={this.state.disabled} variant="info">Build</Button>
           </InputGroup.Prepend>
         </InputGroup>
         </div>
@@ -161,7 +161,7 @@ export default class App extends React.Component{
         </div>
         
         {finalCoordinates.map(data =>
-         <Graph data={finalCoordinates}/>
+         <Graph  bounds={this.state.bounds} handleClearBtn={this.handleClearBtn} data={data}/>
         )}
        
        

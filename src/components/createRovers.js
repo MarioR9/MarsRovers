@@ -13,15 +13,15 @@ export default class CreateRovers extends React.Component{
         return(
             <div>
             <div id={this.props.rover} key={this.props.rover}> 
-                <InputGroup className="mb-3"> 
+                <InputGroup className="mb-2"> 
                     <InputGroup.Prepend>
-                    <InputGroup.Text id="basic-addon1">Rover#{this.props.rover} init location</InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1">Rover#{this.props.rover}</InputGroup.Text>
                     <FormControl className="input-group-move"  placeholder="ex: 12N" onChange={this.props.handleRoverLocationX}
                     />
-                    <InputGroup.Text >Movements</InputGroup.Text>
+                    <InputGroup.Text>Moves</InputGroup.Text>
                     <FormControl className="input-group-move" placeholder="LMLMLMLMM" onChange={this.props.handleMovementsInput}
                     />
-                    <Button onClick={this.props.handleRoverMovment} variant="success">Build rover</Button>
+                    <Button onClick={this.props.handleRoverMovment} disabled={this.state.disabled} variant="success">Build rovers</Button>
                     </InputGroup.Prepend>
                 </InputGroup>
             </div> 

@@ -6,6 +6,17 @@
     - Each rover can move one grid point along its current heading.
     - Each rover will only move until the preceding one has finishes its route.
 
+NASA remotely controls rovers via instructions consisting of strings of letters. 
+Possible instruction letters are L,  R, and M. 
+L and R instruct the rover to turn 90 degrees 
+left or right, respectively (without moving from its current  spot), 
+while M instructs the rover to move forward one grid point along its current heading. 
+
+    N
+ w     E 
+    S
+
+
 TEST INPUT 
 5 5  
 1 2 N  
@@ -17,14 +28,4 @@ EXPECTED OUTPUT
 
 1 3 N  
 5 1 E 
-
-
-NASA remotely controls rovers via instructions consisting of strings of letters. 
-Possible instruction letters are L,  R, and M. 
-L and R instruct the rover to turn 90 degrees 
-left or right, respectively (without moving from its current  spot), 
-while M instructs the rover to move forward one grid point along its current heading. 
-
-    N
- w     E 
-    S
+  
