@@ -4,13 +4,15 @@ import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import CreateRovers from './components/createRovers.js'
 import Graph from './components/graph.js'
 
-
+let finalCoordinates = []
 let dataMovm=[]
+
 export default class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {gridX: '',
     gridY: '', 
+    gridZ: '',
     numberOfRovers: 0 ,
     roverMoves: '', 
     deployedRovers: [],
@@ -50,68 +52,89 @@ export default class App extends React.Component{
   handleRoverLocationY=(e)=>{
     this.setState({gridY: e.currentTarget.value})
   }
+  handleRoverLocationZ=(e)=>{
+    this.setState({gridZ: e.currentTarget.value})
+  }
   handleRoverMovment=()=>{
 
     let north = 'N'
     let south = 'S'
     let west = 'W'
     let east = 'E'
-    let initCoord= [1,2,"N"]
-    let movement = "LMLMLMLMM"
+    
+    let initCoord= [3,3,"E"]
+    let movement = "MMRMMRMRRM".split("")
     let currentX= initCoord[0]
-    let currenty= initCoord[1]
+    let currentY= initCoord[1]
     let currentHeading = initCoord[2]
-    movement.split("")
-    for(let i=0; i<movement.length; i++){
-
+    
+    for(let i=0; i<movement.length; i++){ //we are going to loop over movements after sliting the movement string. we going to check one by one whether is L or R to determine were the rover is heading next.
       switch (movement[i]) {
         case "L":
           if(currentHeading == north){
             currentHeading = west
-            console.log("heading " + west )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == west){
             currentHeading = south
-            console.log("heading " + south )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == south){
             currentHeading = east
-            console.log("heading " + east )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == east){
             currentHeading = north
-            console.log("heading " + north )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }
         case "R":
           if(currentHeading == north){
             currentHeading = east
-            console.log("heading " + east )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == east){
             currentHeading = south
-            console.log("heading " + south )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == south){
             currentHeading = west
-            console.log("heading " + west )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
           }else if(currentHeading == west){
             currentHeading = north
-            console.log("heading " + north )
+            finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
             break;
-          }  
+          }
+          case "M": 
+            if(currentHeading == north){
+              currentY++
+              finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
+              break;
+            }else if(currentHeading == east){
+              currentX++
+              finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
+              break;
+            }else if(currentHeading == south){
+              currentY--
+              finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
+              break;
+            }else if(currentHeading == west){
+              currentX--
+              finalCoordinates.push({x:currentX, y:currentY, heading:currentHeading})
+              break;
+            }  
         } 
     }
-    console.log("nop")
+    console.log(finalCoordinates)
+    
   }
 
   render(){
     return (
       
       <div className="App"> 
-      {this.handleRoverMovment()}
-      {/* <Button onClick={()=>{window.location.reload()}}>Start Again</Button> */}
+      {/* <Button onClick={()=>{window.location.reload()}}>Start Again</Button> */}0
         <div className="input-location">
         <div>
         <InputGroup className="mb-3"> 
@@ -124,9 +147,9 @@ export default class App extends React.Component{
         </InputGroup>
         </div>
         {this.state.deployedRovers.map(rover => 
-          <CreateRovers handleRoverLocationY={this.handleRoverLocationY} handleRoverLocationX={this.handleRoverLocationX} handleMovementsInput={this.handleMovementsInput} handleMovements={this.handleMovements} rover={rover}/>
+          <CreateRovers handleRoverLocationZ={this.handleRoverLocationZ} handleRoverLocationY={this.handleRoverLocationY} handleRoverLocationX={this.handleRoverLocationX} handleMovementsInput={this.handleMovementsInput} handleMovements={this.handleMovements} rover={rover}/>
           )}
-         {this.state.start === "notready" ? null :  <Button onClick={this.handleUnitsDeployment} variant="info">Deploy units</Button>}
+         {this.state.start === "notready" ? null :  <Button onClick={this.handleRoverMovment} variant="info">Deploy units</Button>}
         </div>
         {this.state.deployUnits === true
         ?

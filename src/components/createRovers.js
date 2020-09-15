@@ -12,6 +12,9 @@ export default class CreateRovers extends React.Component{
                     />
                     <FormControl className="input-group" onChange={this.props.handleRoverLocationY}
                     />
+                    <InputGroup.Text id="basic-addon1">Initial Heading</InputGroup.Text>
+                    <FormControl className="input-group" onChange={this.props.handleRoverLocationZ}
+                    />
                     <InputGroup.Text >Movements</InputGroup.Text>
                     <FormControl className="input-group-move" onChange={this.props.handleMovementsInput}
                     />
