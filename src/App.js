@@ -17,18 +17,21 @@ export default class App extends React.Component{
     numberOfRovers: 0 ,
     roverMoves: '', 
     deployedRovers: [],
-    start: "notready",
+    start: false,
     disabled: false,
     deployUnits: false,
     data:[],
     clearBtn: false,
     boundX:'',
     boundY:'',
-    bounds:[]
+    bounds:[],
     };
   }
   handleClearBtn=()=>{
     this.setState({clearBtn: true})
+  }
+  handleShowBtn=()=>{
+    this.setState({show: false})
   }
   handleCollectBtn=()=>{
     this.setState({bounds: {x:this.state.boundX, y:this.state.boundY}})
@@ -46,21 +49,21 @@ export default class App extends React.Component{
     for(let i=0; i < nOfRovers; i++){
       rovers.push(counter++)
     }
-  this.setState({deployedRovers: rovers, start: 'ready'})
+  this.setState({deployedRovers: rovers})
   }
 
   handleRoverLocationX=(e)=>{
     let input = e.currentTarget.value.split("")
     this.setState({gridX: input[0],gridY: input[1], gridZ: input[2]})
   }
-  handleRoverMovment=()=>{
+  handleInfoLoading=()=>{
     dataMovm.push({x: parseInt(this.state.gridX), 
-                  y: parseInt(this.state.gridY), 
-                  mvm: this.state.roverMoves, 
-                  z: this.state.gridZ})
-
+    y: parseInt(this.state.gridY), 
+    mvm: this.state.roverMoves, 
+    z: this.state.gridZ})
     this.setState({data: dataMovm})
-
+  }
+  handleRoverMovment=()=>{
     let north = 'N'
     let south = 'S'
     let west = 'W'
@@ -155,15 +158,22 @@ export default class App extends React.Component{
           handleRoverLocationY={this.handleRoverLocationY} 
           handleRoverLocationX={this.handleRoverLocationX} 
           handleMovementsInput={this.handleMovementsInput} 
-          handleRoverMovment={this.handleRoverMovment}/>
+          handleInfoLoading={this.handleInfoLoading}
+          numberOfRovers={this.state.numberOfRovers}
+          handleRoverMovment={this.handleRoverMovment}
+          data={this.state.data}
+          show={this.state.show}
+          closeShow={this.state.handleShowBtn}/>
         )}
 
         </div>
-        
+      
+        <div>
         {finalCoordinates.map(data =>
          <Graph  bounds={this.state.bounds} handleClearBtn={this.handleClearBtn} data={data}/>
         )}
-       
+        </div>
+        
        
           
       </div>
