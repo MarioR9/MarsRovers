@@ -6,7 +6,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/MarioR9/MarsRovers)
 ## MarsRovers
 
-[![Generic badge](https://img.shields.io/badge/Demo-Web-blue.svg)](https://www.youtube.com/watch?v=M7LLMVlS6hg&feature=emb_logo)&nbsp;
+[![Generic badge](https://img.shields.io/badge/Demo-Web-blue.svg)](https://marsrovers-7f6d9.web.app/)&nbsp;
 
 ## Table of contents
 * [General info](#general-info)
