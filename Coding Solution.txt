@@ -1,3 +1,7 @@
+//Test Data
+   let instructions = ["LMLMLMLMM", "MMRMMRMRRM"]
+   let initCoordinates = [[1,2,"N"],[3,3,"E"]]
+
 roverInstructions=(instructions,initCoordinates)=>{
     //CODING SOLUTION HERE
     let north = 'N'
@@ -65,6 +69,3 @@ roverInstructions=(instructions,initCoordinates)=>{
     }
    }
    
-   //Test Data
-   let instructions = ["LMLMLMLMM", "MMRMMRMRRM"]
-   let initCoordinates = [[1,2,"N"],[3,3,"E"]]
