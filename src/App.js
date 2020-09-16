@@ -146,7 +146,7 @@ export default class App extends React.Component{
         <div>
         <InputGroup className="mb-2"> 
         <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1">Bonds</InputGroup.Text>
+          <InputGroup.Text id="basic-addon1">Bounds</InputGroup.Text>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundX: e.currentTarget.value})}}/>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundY: e.currentTarget.value})}}/>
           <Button variant="outline-info" onClick={this.handleCollectBtn} disabled={this.state.disabled} >Set</Button>
