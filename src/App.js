@@ -81,7 +81,7 @@ export default class App extends React.Component{
       let currentY= this.state.data[k].y
       let currentHeading = this.state.data[k].z.toUpperCase()
 //CODING SOLUTION HERE
-    for(let i=0; i<movement.length; i++){ //we are going to loop over movements after sliting the movement string. we going to check one by one whether is L or R to determine were the rover is heading next.
+    for(let i=0; i<movement.length; i++){ //we are going to loop over movements after spliting the movement string.Also, we going to check one by one whether is L or R to determine were the rover is heading next.
         switch (movement[i]) {
           case "L":
             if(currentHeading === north){
