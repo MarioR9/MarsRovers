@@ -146,13 +146,13 @@ export default class App extends React.Component{
         <div>
         <InputGroup className="mb-2"> 
         <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1">Bounds</InputGroup.Text>
+          <InputGroup.Text id="basic-addon1">Exploration grid bounds</InputGroup.Text>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundX: e.currentTarget.value})}}/>
           <FormControl className="input-group"  onChange={(e)=>{this.setState({boundY: e.currentTarget.value})}}/>
           <Button variant="outline-info" onClick={this.handleCollectBtn} disabled={this.state.disabled} >Set</Button>
           </InputGroup.Prepend>
           <br></br>
-          <Button onClick={this.handleRovers} disabled={this.state.disabled} variant="outline-info">Let's Build Rovers!</Button>
+          <Button onClick={this.handleRovers} disabled={this.state.disabled} variant="outline-info">Build Rover</Button>
           
         </InputGroup>
         </div>

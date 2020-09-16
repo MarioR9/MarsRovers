@@ -24,11 +24,11 @@ export default class CreateRovers extends React.Component{
             <Form >
             <Form.Row>
                 <Col xs={3}>
-                <InputGroup.Text id="basic-addon1">Rover Coordinates</InputGroup.Text>
+                <InputGroup.Text id="basic-addon1">Rover's Coordinates</InputGroup.Text>
                 <FormControl className="input-group-move"  placeholder="ex: 12N" onChange={this.props.handleRoverLocationX}/>
                 </Col>
                 <Col>
-                <InputGroup.Text>Moves</InputGroup.Text>
+                <InputGroup.Text>Instructions</InputGroup.Text>
                 <FormControl className="input-group-move" placeholder="ex: LMLMLMLMM" onChange={this.props.handleMovementsInput}/>
                 </Col>
                 <Col>

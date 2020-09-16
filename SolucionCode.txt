@@ -1,0 +1,70 @@
+roverInstructions=(instructions,initCoordinates)=>{
+    //CODING SOLUTION HERE
+    let north = 'N'
+    let south = 'S'
+    let west = 'W'
+    let east = 'E'
+   
+    for(let k=0; k<instructions.length; k++){
+      let movement = instructions[k].split("")
+      let currentX= initCoordinates[k][0]
+      let currentY= initCoordinates[k][1]
+      let currentHeading = initCoordinates[k][2].toUpperCase()
+   
+    for(let i=0; i<movement.length; i++){
+        switch (movement[i]) {
+          case "L":
+            if(currentHeading === north){
+              currentHeading = west
+              break;
+            }else if(currentHeading === west){
+              currentHeading = south
+              break;
+            }else if(currentHeading === south){
+              currentHeading = east
+              break;
+            }else if(currentHeading === east){
+              currentHeading = north
+              break;
+            }
+            break;
+            default:
+          case "R":
+            if(currentHeading === north){
+              currentHeading = east
+              break;
+            }else if(currentHeading === east){
+              currentHeading = south
+              break;
+            }else if(currentHeading === south){
+              currentHeading = west
+              break;
+            }else if(currentHeading === west){
+              currentHeading = north
+              break;
+            }
+            break;
+          case "M": 
+            if(currentHeading === north){
+              currentY++
+              break;
+            }else if(currentHeading === east){
+              currentX++
+              break;
+            }else if(currentHeading === south){
+              currentY--
+              break;
+            }else if(currentHeading === west){
+              currentX--
+              break;
+          }  
+          break;
+        }
+      }
+      console.log(currentX + " " + currentY + " " + `Heading: ${currentHeading}`)
+    }
+   }
+   
+   //Test Data
+   let instructions = ["LMLMLMLMM", "MMRMMRMRRM"]
+   let initCoordinates = [[1,2,"N"],[3,3,"E"]]
