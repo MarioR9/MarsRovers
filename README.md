@@ -14,6 +14,8 @@
 * [Output](#output)
 * [Test input](#test-input)
 * [Expected Output](#expected-output)
+* [Technologies](#technologies)
+* [images](#images)
 
 ## General Info 
 
