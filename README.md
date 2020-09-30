@@ -42,3 +42,27 @@ MMRMMRMRRM
 1 3 N  
 ******
 5 1 E 
+
+## Technologies
+
+Project is created with:
+* React 
+* HTML
+* CSS
+* BootstrapUI
+
+
+## Images
+
+##### Main 
+<img src="ReadmeImages/home.png" width="300"> 
+
+##### Projects 
+<img src="ReadmeImages/projects.png" width="300"> 
+
+##### Tech 
+<img src="ReadmeImages/tech.png" width="300"> 
+
+##### Contact 
+<img src="ReadmeImages/contact.png" width="300"> 
+
