@@ -56,15 +56,10 @@ Project is created with:
 
 ## Images
 
-##### Main 
-<img src="ReadmeImages/home.png" width="300"> 
+##### Mars Info 
+<img src="ReadmeImages/mars info.png" width="300"> 
 
-##### Projects 
-<img src="ReadmeImages/projects.png" width="300"> 
+##### Output 
+<img src="ReadmeImages/output.png" width="300"> 
 
-##### Tech 
-<img src="ReadmeImages/tech.png" width="300"> 
-
-##### Contact 
-<img src="ReadmeImages/contact.png" width="300"> 
 
