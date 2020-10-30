@@ -2,6 +2,7 @@ import React from 'react';
 import { Chart } from 'react-google-charts';
 import { Accordion, Card, Button, Container, Row, Col } from 'react-bootstrap';
 
+// newgraph? 
 export default class Graph extends React.Component {
 	render(props) {
 		let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); //generate random color
