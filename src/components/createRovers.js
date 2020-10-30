@@ -11,7 +11,7 @@ export default class CreateRovers extends React.Component{
         show: false
         };
       }
-    handleAlert=()=>{ //handles state of notificaions as well as loading info for each rovers
+    handleAlert=()=>{ //handles state of notificaions as well as loading info for each rovers. tag with deatils of rovers's route and final destination
         this.props.handleInfoLoading()
         this.setState({ show: true })
     }  
