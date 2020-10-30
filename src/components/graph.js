@@ -10,6 +10,7 @@ export default class Graph extends React.Component {
 				<Container>
 					<Row>
 						<Col>
+			// Graph added
 							<Chart
 								width={'1200px'}
 								height={'400px'}
